@@ -1,5 +1,5 @@
 
-package br.com.clinicamedica.control;
+package br.com.clinicamedica.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;

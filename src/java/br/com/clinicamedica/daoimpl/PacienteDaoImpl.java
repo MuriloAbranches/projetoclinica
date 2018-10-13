@@ -1,5 +1,5 @@
 
-package br.com.clinicamedica.dao;
+package br.com.clinicamedica.daoimpl;
 
 public class PacienteDaoImpl {
     
