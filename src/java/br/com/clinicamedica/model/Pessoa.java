@@ -1,6 +1,14 @@
-package br.com.clinicamedica.model;
-public abstract class Pessoa {
-
+    package br.com.clinicamedica.model;
+    public abstract class Pessoa {
+    public Pessoa() {
+    }
+    private String id;
+    private String nomeCompleto;
+    private long CPF;
+    private long RG;
+    private Contato contado;
+    private Endereco endereco;
+    
     public String getId() {
         return id;
     }
@@ -58,13 +66,6 @@ public abstract class Pessoa {
         this.endereco = endereco;
     }
 
-    public Pessoa() {
-    }
-    String id;
-    String nomeCompleto;
-    long CPF;
-    long RG;
-    Contato contado;
-    Endereco endereco;
+    
 }
     

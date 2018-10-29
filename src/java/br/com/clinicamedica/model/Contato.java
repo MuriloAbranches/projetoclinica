@@ -1,5 +1,5 @@
 package br.com.clinicamedica.model;
-public class Contato extends Telefone{
+public class Contato{
     private int id;
     private String email;
     private Telefone telefone;
