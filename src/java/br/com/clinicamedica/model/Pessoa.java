@@ -6,7 +6,7 @@
     private String nomeCompleto;
     private long CPF;
     private long RG;
-    private Contato contado;
+    private Contato contato;
     private Endereco endereco;
     
     public String getId() {
@@ -41,12 +41,12 @@
         this.RG = RG;
     }
 
-    public Contato getContado() {
-        return contado;
+    public Contato getContato() {
+        return contato;
     }
 
-    public void setContado(Contato contado) {
-        this.contado = contado;
+    public void setContato(Contato contato) {
+        this.contato = contato;
     }
 
     public Endereco getEndereco() {
@@ -57,12 +57,12 @@
         this.endereco = endereco;
     }
 
-    public Pessoa(String id, String nomeCompleto, long CPF, long RG, Contato contado, Endereco endereco) {
+    public Pessoa(String id, String nomeCompleto, long CPF, long RG, Contato contato, Endereco endereco) {
         this.id = id;
         this.nomeCompleto = nomeCompleto;
         this.CPF = CPF;
         this.RG = RG;
-        this.contado = contado;
+        this.contato = contato;
         this.endereco = endereco;
     }
 
