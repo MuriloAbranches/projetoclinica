@@ -2,18 +2,30 @@
     public abstract class Pessoa {
     public Pessoa() {
     }
-    private String id;
+    private int id;
     private String nomeCompleto;
     private long CPF;
     private long RG;
     private Contato contato;
     private Endereco endereco;
-    
-    public String getId() {
+    private int flagAtivo;
+
+    public Pessoa(int flagAtivo) {
+        this.flagAtivo = flagAtivo;
+    }
+
+    public int getflagAtivo() {
+        return flagAtivo;
+    }
+
+    public void setflagAtivo(int flagAtivo) {
+        this.flagAtivo = flagAtivo;
+    }
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -57,13 +69,14 @@
         this.endereco = endereco;
     }
 
-    public Pessoa(String id, String nomeCompleto, long CPF, long RG, Contato contato, Endereco endereco) {
+    public Pessoa(int id, String nomeCompleto, long CPF, long RG, Contato contato, Endereco endereco, int flagAtivo) {
         this.id = id;
         this.nomeCompleto = nomeCompleto;
         this.CPF = CPF;
         this.RG = RG;
         this.contato = contato;
         this.endereco = endereco;
+        this.flagAtivo = flagAtivo;
     }
 
     

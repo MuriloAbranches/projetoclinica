@@ -11,8 +11,8 @@ public class Medico extends Funcionario{
         this.especialidade = especialidade;
     }
 
-    public Medico(long crm, Especialidade especialidade, Date dataAdimissao, Date dataDemissao, TipoFuncionario cargo, String id, String nomeCompleto, long CPF, long RG, Contato contato, Endereco endereco) {
-        super(dataAdimissao, dataDemissao, cargo, id, nomeCompleto, CPF,RG,contato,endereco);
+    public Medico(long crm, Especialidade especialidade, Date dataAdimissao, Date dataDemissao, TipoFuncionario cargo, int id, String nomeCompleto, long CPF, long RG, Contato contato, Endereco endereco, int flagAtivo) {
+        super(dataAdimissao, dataDemissao, cargo, id, nomeCompleto, CPF,RG,contato,endereco,flagAtivo);
         this.crm = crm;
         this.especialidade = especialidade;
         

@@ -7,9 +7,10 @@ public Paciente() {
 }
     private Date dataNascimento;
 
-    public Paciente(Date dataNascimento, String id, String nomeCompleto, long CPF, long RG, Contato contado, Endereco endereco) {
-        super(id, nomeCompleto, CPF, RG, contado, endereco);
+    public Paciente(Date dataNascimento, int id, String nomeCompleto, long CPF, long RG, Contato contado, Endereco endereco, int flagAtivo) {
+        super(id, nomeCompleto, CPF, RG, contado, endereco, flagAtivo);
         this.dataNascimento = dataNascimento;
+   
     }
 
     public Date getDataNascimento() {
