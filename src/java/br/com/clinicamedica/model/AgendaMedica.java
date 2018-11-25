@@ -1,7 +1,9 @@
 package br.com.clinicamedica.model;
+
 import java.util.Date;
 
 public class AgendaMedica {
+
     private int id;
     private Date dataAgenda;
     private Date horarioInicio;
@@ -10,20 +12,6 @@ public class AgendaMedica {
     private Medico medico;
     private Funcionario criador;
     private Especialidade especialidade;
-
-    public AgendaMedica() {
-    }
-
-    public AgendaMedica(int id, Date dataAgenda, Date horarioInicio, Date horarioFim, int tempoAtendimento, Medico medico, Funcionario criador, Especialidade especialidade) {
-        this.id = id;
-        this.dataAgenda = dataAgenda;
-        this.horarioInicio = horarioInicio;
-        this.horarioFim = horarioFim;
-        this.tempoAtendimento = tempoAtendimento;
-        this.medico = medico;
-        this.criador = criador;
-        this.especialidade = especialidade;
-    }
 
     public int getId() {
         return id;
@@ -88,4 +76,19 @@ public class AgendaMedica {
     public void setEspecialidade(Especialidade especialidade) {
         this.especialidade = especialidade;
     }
+
+    public AgendaMedica() {
+    }
+
+    public AgendaMedica(int id, Date dataAgenda, Date horarioInicio, Date horarioFim, int tempoAtendimento, Medico medico, Funcionario criador, Especialidade especialidade) {
+        this.id = id;
+        this.dataAgenda = dataAgenda;
+        this.horarioInicio = horarioInicio;
+        this.horarioFim = horarioFim;
+        this.tempoAtendimento = tempoAtendimento;
+        this.medico = medico;
+        this.criador = criador;
+        this.especialidade = especialidade;
+    }
+
 }

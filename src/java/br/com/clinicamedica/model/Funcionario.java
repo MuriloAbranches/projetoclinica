@@ -1,30 +1,19 @@
 package br.com.clinicamedica.model;
 
 import java.util.Date;
-//biblioteca para manusear tipo Date
+
 public class Funcionario extends Pessoa {
-    private Date dataAdimissao;
+
+    private Date dataAdmissao;
     private Date dataDemissao;
     private TipoFuncionario cargo;
-    
-    
 
-    public Funcionario() {
+    public Date getDataAdmissao() {
+        return dataAdmissao;
     }
 
-    public Funcionario(Date dataAdimissao, Date dataDemissao, TipoFuncionario cargo, int id, String nomeCompleto, long CPF, long RG, Contato contato, Endereco endereco, int flagAtivo) {
-        super(id, nomeCompleto, CPF, RG, contato, endereco,flagAtivo);
-        this.dataAdimissao = dataAdimissao;
-        this.dataDemissao = dataDemissao;
-        this.cargo = cargo;
-    }
-
-    public Date getDataAdimissao() {
-        return dataAdimissao;
-    }
-
-    public void setDataAdimissao(Date dataAdimissao) {
-        this.dataAdimissao = dataAdimissao;
+    public void setDataAdmissao(Date dataAdmissao) {
+        this.dataAdmissao = dataAdmissao;
     }
 
     public Date getDataDemissao() {
@@ -43,5 +32,13 @@ public class Funcionario extends Pessoa {
         this.cargo = cargo;
     }
 
-  
+    public Funcionario() {
+    }
+
+    public Funcionario(Date dataAdmissao, Date dataDemissao, TipoFuncionario cargo) {
+        this.dataAdmissao = dataAdmissao;
+        this.dataDemissao = dataDemissao;
+        this.cargo = cargo;
+    }
+
 }

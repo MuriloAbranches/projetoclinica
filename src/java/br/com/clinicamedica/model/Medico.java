@@ -2,21 +2,10 @@ package br.com.clinicamedica.model;
 
 import java.util.Date;
 
-public class Medico extends Funcionario{
-     private long crm;
-     private Especialidade especialidade;
+public class Medico extends Funcionario {
 
-    public Medico(long crm, Especialidade especialidade) {
-        this.crm = crm;
-        this.especialidade = especialidade;
-    }
-
-    public Medico(long crm, Especialidade especialidade, Date dataAdimissao, Date dataDemissao, TipoFuncionario cargo, int id, String nomeCompleto, long CPF, long RG, Contato contato, Endereco endereco, int flagAtivo) {
-        super(dataAdimissao, dataDemissao, cargo, id, nomeCompleto, CPF,RG,contato,endereco,flagAtivo);
-        this.crm = crm;
-        this.especialidade = especialidade;
-        
-    }
+    private long crm;
+    private Especialidade especialidade;
 
     public long getCrm() {
         return crm;
@@ -33,5 +22,14 @@ public class Medico extends Funcionario{
     public void setEspecialidade(Especialidade especialidade) {
         this.especialidade = especialidade;
     }
-   
+
+    public Medico() {
+    }
+
+    public Medico(long crm, Especialidade especialidade, Date dataAdmissao, Date dataDemissao, TipoFuncionario cargo) {
+        super(dataAdmissao, dataDemissao, cargo);
+        this.crm = crm;
+        this.especialidade = especialidade;
+    }
+
 }

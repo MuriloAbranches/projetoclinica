@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,12 +11,12 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
-        
+
         <script type="text/javascript">
             $("#dataAgenda").mask("00/00/0000");
             $("#horarioInicio, #horarioFim").mask("00:00");
         </script>
-        
+
         <link rel="shortcut icon" href="../img/logo1.png" >
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.css" rel="stylesheet">
@@ -89,25 +88,25 @@
                     <div class="col-lg-6"> <!--12-->
                         <h2>Criar Agenda</h2>
 
-                       
+
                         <form method="get" action="">
                             <div class="form-group">
-                                
+
                                 <label>Buscar Médico:
                                     <input name="cep" type="text" id="cep" value="" size="10" maxlength="11" class="form-control" /></label>
                                 <button type="submit" class="btn btn-default>"><i class="fa fa-search"></i> Buscar</button><br />
                                 <p class="help-block">Informe o Nome</p>
-                                
-                                 <label>Nome Completo:
+
+                                <label>Nome Completo:
                                     <input name="nomeMedico" type="text" id="nomeMedico" size="60" maxlength="150" class="form-control"/></label><br />
                                 <label>CRM:
                                     <input name="crm" type="text" id="crm" size="25"  maxlength="11" class="form-control"/></label>
                                 <label>Especialidade:
                                     <input name="especialidade" type="text" id="especialidade" size="26" class="form-control" /></label><br /><br />
-                                    <label>Agenda:</label><br />
+                                <label>Agenda:</label><br />
                                 <label>Data:
                                     <input name="dataAgenda" type="text" id="dataAgenda" size="25" class="form-control" placeholder="DD/MM/AAAA" maxlength="10" /></label><br />
-                                      <label>Horário Inicio:
+                                <label>Horário Inicio:
                                     <input name="horarioInicio" type="text" id="horarioInicio" size="25" class="form-control" placeholder="HH:MM" /></label>
                                 <label>Horário Fim:
                                     <input name="horarioFim" type="text" id="horarioFim" size="25" class="form-control" placeholder="HH:MM" /></label><br />
@@ -115,7 +114,7 @@
                                     <input name="horarioAtendimento" type="text" id="horarioAtendimento" size="25" class="form-control" placeholder="Minutos" maxlength="2" /></label><br />
                             </div>
                         </form>
-       
+
 
                         <div  class="form-action">
                             <button type="submit" class="btn btn-default">Salvar</button>
@@ -139,8 +138,8 @@
                                                 <th>Médico</th>
                                                 <th>Especialidade</th>
                                                 <th>Data</th>
-                                                
-                                                
+
+
                                                 <th>Ação</th>
                                             </tr>
                                         </thead>
@@ -148,9 +147,9 @@
                                             <tr>
                                                 <td>João</td>
                                                 <td>1265</td>
-                                                
+
                                                 <td>47214587</td>
-                                               
+
                                                 <td>
                                                     <button>Excluir</button>
                                                 </td>
@@ -158,9 +157,9 @@
                                             <tr>
                                                 <td>Maria</td>
                                                 <td>2614568</td>
-                                                
+
                                                 <td>987462</td>
-                                                
+
                                                 <td>
                                                     <button>Excluir</button>
                                                 </td>
@@ -168,9 +167,9 @@
                                             <tr>
                                                 <td>João</td>
                                                 <td>1265</td>
-                                                
+
                                                 <td>47214587</td>
-                                                
+
                                                 <td>
                                                     <button>Excluir</button>
                                                 </td>
@@ -178,9 +177,9 @@
                                             <tr>
                                                 <td>Maria</td>
                                                 <td>2614568</td>
-                                                
+
                                                 <td>987462</td>
-                                               
+
                                                 <td>
                                                     <button>Excluir</button>
                                                 </td>
@@ -188,9 +187,9 @@
                                             <tr>
                                                 <td>João</td>
                                                 <td>1265</td>
-                                                
+
                                                 <td>47214587</td>
-                                                
+
                                                 <td>
                                                     <button>Excluir</button>
                                                 </td>
@@ -198,9 +197,9 @@
                                             <tr>
                                                 <td>Maria</td>
                                                 <td>2614568</td>
-                                             
+
                                                 <td>987462</td>
-                                                
+
                                                 <td>
                                                     <button>Excluir</button>
                                                 </td>
@@ -208,9 +207,9 @@
                                             <tr>
                                                 <td>João</td>
                                                 <td>1265</td>
-                                               
+
                                                 <td>47214587</td>
-                                                
+
                                                 <td>
                                                     <button>Excluir</button>
                                                 </td>
@@ -221,7 +220,7 @@
                             </div>
                         </form>
                     </div>
-                    
+
                 </div><!-- /.row -->
             </div><!-- /#page-wrapper -->
         </div><!-- /#wrapper -->

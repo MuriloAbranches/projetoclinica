@@ -1,28 +1,13 @@
 package br.com.clinicamedica.model;
-import java.util.Date;
+
 public class Consulta {
+
     private int id;
     private Paciente paciente;
     private Medico medico;
     private Especialidade especialidade;
-    private Date dataConsulta; 
-    private Date horaConsulta;
-    private String prontuario;
-    private Funcionario agendadoPor;
-
-    public Consulta(int id, Paciente paciente, Medico medico, Especialidade especialidade, Date dataConsulta, Date horaConsulta, String prontuario, Funcionario agendadoPor) {
-        this.id = id;
-        this.paciente = paciente;
-        this.medico = medico;
-        this.especialidade = especialidade;
-        this.dataConsulta = dataConsulta;
-        this.horaConsulta = horaConsulta;
-        this.prontuario = prontuario;
-        this.agendadoPor = agendadoPor;
-    }
-
-    public Consulta() {
-    }
+    private DataHoraConsulta dataHoraConsulta;
+    private int flagAtivo;
 
     public int getId() {
         return id;
@@ -56,35 +41,32 @@ public class Consulta {
         this.especialidade = especialidade;
     }
 
-    public Date getDataConsulta() {
-        return dataConsulta;
+    public DataHoraConsulta getDataHoraConsulta() {
+        return dataHoraConsulta;
     }
 
-    public void setDataConsulta(Date dataConsulta) {
-        this.dataConsulta = dataConsulta;
+    public void setDataHoraConsulta(DataHoraConsulta dataHoraConsulta) {
+        this.dataHoraConsulta = dataHoraConsulta;
     }
 
-    public Date getHoraConsulta() {
-        return horaConsulta;
+    public int getFlagAtivo() {
+        return flagAtivo;
     }
 
-    public void setHoraConsulta(Date horaConsulta) {
-        this.horaConsulta = horaConsulta;
+    public void setFlagAtivo(int flagAtivo) {
+        this.flagAtivo = flagAtivo;
     }
 
-    public String getProntuario() {
-        return prontuario;
+    public Consulta() {
     }
 
-    public void setProntuario(String prontuario) {
-        this.prontuario = prontuario;
+    public Consulta(int id, Paciente paciente, Medico medico, Especialidade especialidade, DataHoraConsulta dataHoraConsulta, int flagAtivo) {
+        this.id = id;
+        this.paciente = paciente;
+        this.medico = medico;
+        this.especialidade = especialidade;
+        this.dataHoraConsulta = dataHoraConsulta;
+        this.flagAtivo = flagAtivo;
     }
 
-    public Funcionario getAgendadoPor() {
-        return agendadoPor;
-    }
-
-    public void setAgendadoPor(Funcionario agendadoPor) {
-        this.agendadoPor = agendadoPor;
-    }
 }

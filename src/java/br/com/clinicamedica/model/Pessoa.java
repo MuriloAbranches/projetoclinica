@@ -1,26 +1,15 @@
-    package br.com.clinicamedica.model;
-    public abstract class Pessoa {
-    public Pessoa() {
-    }
+package br.com.clinicamedica.model;
+
+public abstract class Pessoa {
+
     private int id;
     private String nomeCompleto;
-    private long CPF;
-    private long RG;
+    private long cpf;
+    private long rg;
     private Contato contato;
     private Endereco endereco;
     private int flagAtivo;
 
-    public Pessoa(int flagAtivo) {
-        this.flagAtivo = flagAtivo;
-    }
-
-    public int getflagAtivo() {
-        return flagAtivo;
-    }
-
-    public void setflagAtivo(int flagAtivo) {
-        this.flagAtivo = flagAtivo;
-    }
     public int getId() {
         return id;
     }
@@ -37,20 +26,20 @@
         this.nomeCompleto = nomeCompleto;
     }
 
-    public long getCPF() {
-        return CPF;
+    public long getCpf() {
+        return cpf;
     }
 
-    public void setCPF(long CPF) {
-        this.CPF = CPF;
+    public void setCpf(long cpf) {
+        this.cpf = cpf;
     }
 
-    public long getRG() {
-        return RG;
+    public long getRg() {
+        return rg;
     }
 
-    public void setRG(long RG) {
-        this.RG = RG;
+    public void setRg(long rg) {
+        this.rg = rg;
     }
 
     public Contato getContato() {
@@ -69,16 +58,25 @@
         this.endereco = endereco;
     }
 
-    public Pessoa(int id, String nomeCompleto, long CPF, long RG, Contato contato, Endereco endereco, int flagAtivo) {
+    public int getFlagAtivo() {
+        return flagAtivo;
+    }
+
+    public void setFlagAtivo(int flagAtivo) {
+        this.flagAtivo = flagAtivo;
+    }
+
+    public Pessoa() {
+    }
+
+    public Pessoa(int id, String nomeCompleto, long cpf, long rg, Contato contato, Endereco endereco, int flagAtivo) {
         this.id = id;
         this.nomeCompleto = nomeCompleto;
-        this.CPF = CPF;
-        this.RG = RG;
+        this.cpf = cpf;
+        this.rg = rg;
         this.contato = contato;
         this.endereco = endereco;
         this.flagAtivo = flagAtivo;
     }
 
-    
 }
-    

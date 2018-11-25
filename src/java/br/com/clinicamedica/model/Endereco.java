@@ -1,25 +1,17 @@
 package br.com.clinicamedica.model;
-public class Endereco{
+
+public class Endereco {
+
     private int id;
-    private int CEP;
+    private int cep;
     private String logradouro;
     private int numero;
     private String bairro;
     private String cidade;
-    private char estado;
+    private String estado;
+    private int flagAtivo;
 
-    public Endereco() {
-    }
-
-    public Endereco(int id, int CEP, String logradouro, int numero, String bairro, String cidade, char estado) {
-        this.id = id;
-        this.CEP = CEP;
-        this.logradouro = logradouro;
-        this.numero = numero;
-        this.bairro = bairro;
-        this.cidade = cidade;
-        this.estado = estado;
-    }
+    private Pessoa pessoa;
 
     public int getId() {
         return id;
@@ -29,12 +21,12 @@ public class Endereco{
         this.id = id;
     }
 
-    public int getCEP() {
-        return CEP;
+    public int getCep() {
+        return cep;
     }
 
-    public void setCEP(int CEP) {
-        this.CEP = CEP;
+    public void setCep(int cep) {
+        this.cep = cep;
     }
 
     public String getLogradouro() {
@@ -69,12 +61,41 @@ public class Endereco{
         this.cidade = cidade;
     }
 
-    public char getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(char estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
-    
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    public int getFlagAtivo() {
+        return flagAtivo;
+    }
+
+    public void setFlagAtivo(int flagAtivo) {
+        this.flagAtivo = flagAtivo;
+    }
+
+    public Endereco() {
+    }
+
+    public Endereco(int id, int cep, String logradouro, int numero, String bairro, String cidade, String estado) {
+        this.id = id;
+        this.cep = cep;
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.estado = estado;
+    }
+
 }

@@ -1,4 +1,7 @@
-
+<%@page import="br.com.clinicamedica.model.Consulta"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="br.com.clinicamedica.model.Especialidade"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,14 +12,14 @@
         <meta name="author" content="">
 
         <title>Clínica Médica - Agendamentos</title>
-        
+
         <link rel="shortcut icon" href="../img/logo1.png" >
         <!-- Bootstrap core CSS -->
-        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="../adminpages/css/bootstrap.css" rel="stylesheet">
 
         <!-- Add custom CSS here -->
-        <link href="css/sb-admin.css" rel="stylesheet">
-        <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+        <link href="../adminpages/css/sb-admin.css" rel="stylesheet">
+        <link rel="stylesheet" href="../adminpages/font-awesome/css/font-awesome.min.css">
     </head>
 
     <body>
@@ -39,11 +42,11 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav side-nav">
-                        <li><a href="index.jsp"><i class="fa fa-dashboard"></i> Inicio</a></li>
-                        <li><a href="funcionarioAdm.jsp"><i class="fa fa-edit"></i> Funcionários</a></li>
-                        <li><a href="pacienteAdm.jsp"><i class="fa fa-edit"></i> Pacientes</a></li>
-                        <li class="active"><a href="agendamentoAdm.jsp"><i class="fa fa-edit"></i> Agendamentos</a></li>
-                        <li><a href="agendaAdm.jsp"><i class="fa fa-edit"></i> Agenda Médica</a></li>
+                        <li><a href="../adminpages/index.jsp"><i class="fa fa-dashboard"></i> Inicio</a></li>
+                        <li><a href="../administrativo/medicos"><i class="fa fa-edit"></i> Médicos</a></li>
+                        <li><a href="../administrativo/pacientes"><i class="fa fa-edit"></i> Pacientes</a></li>
+                        <li class="active"><a href="../administrativo/consultas"><i class="fa fa-edit"></i> Agendamentos</a></li>
+                        
                     </ul>
 
                     <!-- Mensagens-->
@@ -69,7 +72,7 @@
                     <div class="col-lg-12">
                         <h1>Agendamentos</h1>
                         <ol class="breadcrumb">
-                            <li><a href="index.jsp"><i class="fa fa-dashboard"></i> Inicio</a></li>
+                            <li><a href="../adminpages/index.jsp"><i class="fa fa-dashboard"></i> Inicio</a></li>
                             <li class="active"><i class="fa fa-edit"></i> Agendamentos</li>
                         </ol>
 
@@ -77,192 +80,87 @@
                 </div><!-- /.row -->
 
                 <div class="row">
+                    <%
+                        List<Especialidade> especialidades = (ArrayList<Especialidade>) request.getAttribute("listaEspecialidades");
+                    %>
                     <div class="col-lg-6"> <!--12-->
                         <h2>Agendamento</h2>
 
-                       
-                        <form method="get" action="">
+
+                        <form method="POST" action="../consulta">
                             <div class="form-group">
-                                
                                 <label>Buscar Paciente:
-                                    <input name="cep" type="text" id="cep" value="" size="10" maxlength="11" class="form-control" /></label>
-                                <button type="submit" class="btn btn-default>"><i class="fa fa-search"></i> Buscar</button><br />
+                                    <input name="cpfBusca" type="text" id="cpfBusca" value="" size="10" maxlength="11" class="form-control" /></label>
                                 <p class="help-block">Informe o CPF</p>
-                                
-                                 <label>Nome Completo:
-                                    <input name="nomePaciente" type="text" id="nomePaciente" size="25" maxlength="150" class="form-control"/></label>
-                                <label>CPF:
-                                    <input name="cpf" type="text" id="cpf" size="25"  maxlength="11" class="form-control"/></label><br />
-                               
                             </div>
 
                             <div class="form-group" >
                                 <label>Especialidade</label>
-                                <select class="form-control">
-                                    <option>Selecione</option>
-                                    <option>Ortopedia</option>
-                                    <option>Oftalmologia</option>
-                                    <option>Ginecologia</option>
-                                    <option>Geriatria</option>
-                                    <option>Cardiologia</option>
-                                </select>
+                                <select name="especialidades">
+                                    <%
+                                        for (Especialidade especialidade : especialidades) {
+                                    %> 
+                                    <option value="<%= especialidade.getId()%>"> <%= especialidade.getNome()%></option>
+                                    <%
+                                        }
+                                    %>
+                                </select> 
                             </div>
 
-                            <div class="form-group">
-                                <label>Médico</label>
-                                <select class="form-control">
-                                    <option>Selecione</option>
-                                    <option>Maria</option>
-                                    <option>José</option>
-                                    <option>Bruna</option>
-                                    <option>Ana</option>
-                                </select>
+                            <div  class="form-action">
+                                <button type="submit" class="btn btn-default"  name="opcao" value="buscarPaciente">Agendar</button>
                             </div>
-
-                            <div class="form-group">
-                                <label>Data Agendamento</label>
-                                <select class="form-control">
-                                    <option>Selecione</option>
-                                    <option>19/10/2018</option>
-                                    <option>20/10/2018</option>
-                                    <option>21/10/2018</option>
-                                    <option>22/10/2018</option>
-
-                                </select>
-                            </div>
-                                <div class="form-group" >
-                                    <label>Horário</label>
-                                    <select class="form-control">
-                                        <option>Selecione</option>
-                                        <option>12:00</option>
-                                        <option>12:30</option>
-                                        <option>13:00</option>
-                                        <option>13:30</option>
-
-                                    </select>
-                                </div>
                         </form>
 
-                        <div  class="form-action">
-                            <button type="submit" class="btn btn-default">Salvar</button>
-                        </div>
+
                     </div>
                     <!---------------------------------->
                     <div class="col-lg-6"> <!--12-->
                         <h3>Agendamentos</h3>
-                        <form method="get" action="">
-                            <div class="form-group">
-                                <label>Consulta por Paciente:
-                                    <input name="cpfBusca" type="text" id="cpfBusca" value="" size="10" maxlength="11" class="form-control" /></label>
-                                <button type="submit" class="btn btn-default>"><i class="fa fa-search"></i> Buscar</button><br />
 
-                                <h4>Agendas</h4>
-
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-striped tablesorter">
-                                        <thead>
-                                            <tr>
-                                                <th>Paciente</th>
-                                                <th>Médico</th>
-                                                <th>Especialidade</th>
-                                                <th>Data</th>
-                                                <th>Horário</th>
-                                                
-                                                <th>Ação</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>João</td>
-                                                <td>João</td>
-                                                <td>1265</td>
-                                                <td>12345</td>
-                                                <td>47214587</td>
-                                               
-                                                <td>
-                                                    <button>Excluir</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>João</td>
-                                                <td>Maria</td>
-                                                <td>2614568</td>
-                                                <td>333333</td>
-                                                <td>987462</td>
-                                                
-                                                <td>
-                                                    <button>Excluir</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>João</td>
-                                                <td>João</td>
-                                                <td>1265</td>
-                                                <td>12345</td>
-                                                <td>47214587</td>
-                                                
-                                                <td>
-                                                    <button>Excluir</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>João</td>
-                                                <td>Maria</td>
-                                                <td>2614568</td>
-                                                <td>333333</td>
-                                                <td>987462</td>
-                                               
-                                                <td>
-                                                    <button>Excluir</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>João</td>
-                                                <td>João</td>
-                                                <td>1265</td>
-                                                <td>12345</td>
-                                                <td>47214587</td>
-                                                
-                                                <td>
-                                                    <button>Excluir</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>João</td>
-                                                <td>Maria</td>
-                                                <td>2614568</td>
-                                                <td>333333</td>
-                                                <td>987462</td>
-                                                
-                                                <td>
-                                                    <button>Excluir</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>João</td>
-                                                <td>João</td>
-                                                <td>1265</td>
-                                                <td>12345</td>
-                                                <td>47214587</td>
-                                                
-                                                <td>
-                                                    <button>Excluir</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                        <div class="form-group">
+                            <%
+                                List<Consulta> consultas = (ArrayList<Consulta>) request.getAttribute("listaConsultas");
+                            %>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped tablesorter">
+                                    <thead>
+                                        <tr>
+                                            <th>Consulta</th>
+                                            <th>Paciente</th>
+                                            <th>Especialidade</th>
+                                            <th>Medico</th>
+                                            <th>Data/Hora</th>
+                                         </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%
+                                            for (Consulta consulta : consultas) {
+                                        %>  
+                                        <tr>
+                                            <td><%= consulta.getId()%></td>
+                                            <td><%= consulta.getPaciente().getNomeCompleto()%></td>
+                                            <td><%= consulta.getEspecialidade().getNome()%></td>
+                                            <td><%= consulta.getMedico().getNomeCompleto()%></td>
+                                            <td><%= consulta.getDataHoraConsulta().getDataConsulta()+" - "+ consulta.getDataHoraConsulta().getHoraConsulta() %></td>
+                                        </tr>
+                                        <%
+                                            };
+                                        %>
+                                    </tbody>
+                                </table>
                             </div>
-                        </form>
+                        </div>
+
                     </div>
-                    
+
                 </div><!-- /.row -->
             </div><!-- /#page-wrapper -->
         </div><!-- /#wrapper -->
 
         <!-- JavaScript -->
-        <script src="js/jquery-1.10.2.js"></script>
-        <script src="js/bootstrap.js"></script>
+        <script src="../adminpages/js/jquery-1.10.2.js"></script>
+        <script src="../adminpages/js/bootstrap.js"></script>
 
     </body>
 </html>

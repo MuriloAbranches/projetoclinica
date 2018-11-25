@@ -1,8 +1,10 @@
 package br.com.clinicamedica.model;
+
 public class Telefone {
-   private int id;
-   private int ddd;
-   private int numero;
+
+    private int id;
+    private int ddd;
+    private int numero;
 
     public int getId() {
         return id;
@@ -27,4 +29,14 @@ public class Telefone {
     public void setNumero(int numero) {
         this.numero = numero;
     }
+
+    public Telefone() {
+    }
+
+    public Telefone(int id, int ddd, int numero) {
+        this.id = id;
+        this.ddd = ddd;
+        this.numero = numero;
+    }
+
 }
