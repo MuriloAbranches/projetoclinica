@@ -16,11 +16,11 @@ import java.util.List;
 
 public class ConsultaDaoImpl implements ConsultaDao {
 
-    private static final String INSERT = "INSERT INTO CONSULTAS values (nextval('consultas_seq'),?,?,?,?);";
+    private static final String INSERT = "INSERT INTO CONSULTAS values (nextval('consultas_seq'),?,?,?,?,?);";
     private static final String DELETE = "UPDATE CONSULTAS SET flag_ativo = ? WHERE id = ?";
     private static final String SELECT_ALL = "SELECT * FROM CONSULTAS";
-    private static final String SELECT = "SELECT * FROM PACIENTES WHERE id = ?";
-    private static final String UPDATE = "UPDATE CONSULTAS SET paciente = ?, medico = ?, especialidade = ? WHERE id = ?";
+    private static final String SELECT = "SELECT * FROM CONSULTAS WHERE id = ?";
+    private static final String UPDATE = "UPDATE CONSULTAS SET medico = ?, data_hora_consulta = ?, flag_ativo = ? WHERE id = ?";
     private static final String ACTIVATE = "UPDATE CONSULTAS SET flag_ativo = ? WHERE cpf = ?";
   
 
@@ -36,6 +36,7 @@ public class ConsultaDaoImpl implements ConsultaDao {
             pstmt.setInt(2, consulta.getEspecialidade().getId());
             pstmt.setLong(3, consulta.getMedico().getCrm());
             pstmt.setInt(4, consulta.getDataHoraConsulta().getId());
+            pstmt.setInt(5, consulta.getFlagAtivo());
             
 
             pstmt.execute();
@@ -102,9 +103,12 @@ public class ConsultaDaoImpl implements ConsultaDao {
 
             Paciente paciente = new Paciente();
             paciente.setId(Integer.parseInt(rs.getString("paciente")));
-
             
-
+            DataHoraConsulta dataHoraConsulta = new DataHoraConsulta();
+            dataHoraConsulta.setId(Integer.parseInt(rs.getString("data_hora_consulta")));
+       
+            consulta.setFlagAtivo(Integer.parseInt(rs.getString("flag_ativo")));
+            consulta.setDataHoraConsulta(dataHoraConsulta);
             consulta.setEspecialidade(especialidade);
             consulta.setMedico(medico);
             consulta.setPaciente(paciente);
@@ -131,9 +135,9 @@ public class ConsultaDaoImpl implements ConsultaDao {
             conexao = ConectaBanco.getConexao();
             PreparedStatement pstmt = conexao.prepareStatement(UPDATE);
 
-            pstmt.setInt(1, consulta.getEspecialidade().getId());
-            pstmt.setLong(2, consulta.getPaciente().getCpf());
-            pstmt.setLong(3, consulta.getMedico().getCrm());
+            pstmt.setLong(1, consulta.getMedico().getCrm());
+            pstmt.setInt(2, consulta.getDataHoraConsulta().getId());
+            pstmt.setInt(3, consulta.getFlagAtivo());
             pstmt.setInt(4, consulta.getId());
 
             pstmt.execute();

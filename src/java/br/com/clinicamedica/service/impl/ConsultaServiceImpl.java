@@ -3,10 +3,12 @@ package br.com.clinicamedica.service.impl;
 import br.com.clinicamedica.dao.ConsultaDao;
 import br.com.clinicamedica.dao.DataHoraConsultaDao;
 import br.com.clinicamedica.dao.EspecialidadeDao;
+import br.com.clinicamedica.dao.MedicoDao;
 import br.com.clinicamedica.dao.PacienteDao;
 import br.com.clinicamedica.dao.impl.ConsultaDaoImpl;
 import br.com.clinicamedica.dao.impl.DataHoraConsultaDaoImpl;
 import br.com.clinicamedica.dao.impl.EspecialidadeDaoImpl;
+import br.com.clinicamedica.dao.impl.MedicoDaoImpl;
 import br.com.clinicamedica.dao.impl.PacienteDaoImpl;
 import br.com.clinicamedica.model.Consulta;
 import br.com.clinicamedica.model.DataHoraConsulta;
@@ -48,6 +50,7 @@ public class ConsultaServiceImpl implements ConsultaService {
             consulta.setMedico(medico);
             consulta.setEspecialidade(especialidade);
             consulta.setDataHoraConsulta(dataHoraConsulta);
+            consulta.setFlagAtivo(1);
             
             
             DataHoraConsultaDao dataHoraConsultaDao = new DataHoraConsultaDaoImpl();
@@ -71,17 +74,105 @@ public class ConsultaServiceImpl implements ConsultaService {
 
     @Override
     public Consulta buscarConsulta(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Consulta consulta = new Consulta();
+            int id = (Integer.parseInt(request.getParameter("buscaConsulta")));
+            consulta.setId(id);
+            consultaDao = new ConsultaDaoImpl();
+            consulta  = consultaDao.readConsulta(consulta);
+            
+            Paciente paciente = new Paciente();
+            PacienteDao pacienteDao = new PacienteDaoImpl();
+            paciente = pacienteDao.readPacienteById(consulta.getPaciente());
+
+            Medico medico = new Medico();
+            MedicoDao medicoDao = new MedicoDaoImpl();
+            medico = medicoDao.readMedico(consulta.getMedico());
+
+            Especialidade especialidade = new Especialidade();
+            especialidadeDao = new EspecialidadeDaoImpl();
+            especialidade = especialidadeDao.readEspecialidade(consulta.getEspecialidade());
+
+            DataHoraConsulta dataHoraConsulta = new DataHoraConsulta();
+            DataHoraConsultaDao dataHoraConsultaDao = new DataHoraConsultaDaoImpl();
+            dataHoraConsulta = dataHoraConsultaDao.readDataHoraConsulta(consulta.getDataHoraConsulta());
+
+            consulta.setPaciente(paciente);
+            consulta.setMedico(medico);
+            consulta.setEspecialidade(especialidade);
+            consulta.setDataHoraConsulta(dataHoraConsulta);
+
+            return consulta;
+
+        } catch (Exception e) {
+            System.out.println("ERRO(ConsultaServiceB): " + e.getMessage());
+            return null;
+        }
     }
 
     @Override
     public boolean alterarConsulta(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+
+            Medico medico = new Medico();
+            medico.setCrm(Long.parseLong(request.getParameter("medico")));
+
+            DataHoraConsulta dataHoraConsulta = new DataHoraConsulta();
+            dataHoraConsulta.setId(Integer.parseInt(request.getParameter("dataHora")));
+            dataHoraConsulta.setFlagAtivo(0);
+
+            Consulta consulta = new Consulta();
+            
+            consulta.setId(Integer.parseInt(request.getParameter("idConsulta")));
+            consulta.setMedico(medico);
+            consulta.setDataHoraConsulta(dataHoraConsulta);
+            consulta.setFlagAtivo(1);
+
+            DataHoraConsultaDao dataHoraConsultaDao = new DataHoraConsultaDaoImpl();
+            dataHoraConsultaDao.updateDataHoraConsulta(dataHoraConsulta);
+            
+            DataHoraConsulta dataAntiga = new DataHoraConsulta();
+            dataAntiga.setId(Integer.parseInt(request.getParameter("idDataAntigo")));
+            dataAntiga.setFlagAtivo(1);
+            DataHoraConsultaDao dataDao = new DataHoraConsultaDaoImpl();
+            dataDao.updateDataHoraConsulta(dataAntiga);
+
+            consultaDao = new ConsultaDaoImpl();
+            consultaDao.updateConsulta(consulta);
+
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("ERRO(ConsultaServiceA): " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
     public boolean excluirConsulta(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          try {
+
+            DataHoraConsulta dataHoraConsulta = new DataHoraConsulta();
+            dataHoraConsulta.setId(Integer.parseInt(request.getParameter("idDataAntigo")));
+            dataHoraConsulta.setFlagAtivo(1);
+
+            Consulta consulta = new Consulta();
+            
+            consulta.setId(Integer.parseInt(request.getParameter("idConsulta")));
+            consulta.setFlagAtivo(0);
+
+            DataHoraConsultaDao dataHoraConsultaDao = new DataHoraConsultaDaoImpl();
+            dataHoraConsultaDao.updateDataHoraConsulta(dataHoraConsulta);
+
+            consultaDao = new ConsultaDaoImpl();
+            consultaDao.deleteConsulta(consulta);
+
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("ERRO(ConsultaServiceE): " + e.getMessage());
+            return false;
+        }
     }
 
 }

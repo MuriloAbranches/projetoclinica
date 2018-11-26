@@ -94,9 +94,9 @@
                                 <p class="help-block">Informe o CPF</p>
                             </div>
 
-                            <div class="form-group" >
+                            <div>
                                 <label>Especialidade</label>
-                                <select name="especialidades">
+                                <select class="form-control" name="especialidades">
                                     <%
                                         for (Especialidade especialidade : especialidades) {
                                     %> 
@@ -104,7 +104,9 @@
                                     <%
                                         }
                                     %>
-                                </select> 
+                                </select>
+                                <p class="help-block">Selecione a Especialidade</p> <br /> <br />
+                                
                             </div>
 
                             <div  class="form-action">
@@ -116,7 +118,14 @@
                     </div>
                     <!---------------------------------->
                     <div class="col-lg-6"> <!--12-->
-                        <h3>Agendamentos</h3>
+                          <h3>Consultar Agendamento</h3>
+                        <form method="POST" action="../consulta">
+                            <div class="form-group">
+                                <label>Consulta por ID:
+                                    <input name="buscaConsulta" type="text" id="buscaConsulta" value="" size="10" maxlength="11" class="form-control" /></label>
+                                <button type="submit" name="opcao" value="buscar" class="btn btn-default>"><i class="fa fa-search"></i> Buscar</button><br />
+                            </div>
+                        </form>
 
                         <div class="form-group">
                             <%
@@ -151,7 +160,7 @@
                                 </table>
                             </div>
                         </div>
-
+                                    
                     </div>
 
                 </div><!-- /.row -->

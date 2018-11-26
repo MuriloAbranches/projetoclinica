@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -91,7 +90,7 @@
                                     <option>Médico</option>
                                 </select>
                             </div>
-                            
+
                             <div class="form-group">
 
                                 <label>Nome Completo:
@@ -102,7 +101,7 @@
                                     <input name="rg" type="text" id="rg" size="26" class="form-control" /></label><br />
                                 <label>CRM:
                                     <input name="crm" type="text" id="crm" size="25"  maxlength="20" class="form-control" disabled=""/></label><br /><br />
-                               <label>Contato:</label><br />
+                                <label>Contato:</label><br />
                                 <label>DDD:
                                     <input name="dddtel" type="tel" id="dddtel" size="1" maxlength="4"  class="form-control" /></label> 
                                 <label>Telefone:
@@ -114,8 +113,8 @@
                                 <label>Email:
                                     <input name="email" type="email" id="email" size="60" maxlength="50" class="form-control"/></label><br />
                             </div>
-                            
-                            
+
+
                         </form>
 
                         <form method="get" action="">
@@ -145,7 +144,7 @@
 
                     </div>
                     <!---------------------------------->
-                     <div class="col-lg-6"> <!--12-->
+                    <div class="col-lg-6"> <!--12-->
                         <h2>Funcionários</h2>
                         <form method="get" action="">
                             <div class="form-group">

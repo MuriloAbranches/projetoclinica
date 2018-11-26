@@ -10,4 +10,6 @@ public interface DataHoraConsultaDao {
     public DataHoraConsulta readDataHoraConsulta(DataHoraConsulta dataHoraConsulta);
 
     public boolean updateDataHoraConsulta(DataHoraConsulta dataHoraConsulta);
+    
+    public List<DataHoraConsulta> readDataHoraById(DataHoraConsulta dataHoraConsulta);
 }

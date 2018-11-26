@@ -82,19 +82,18 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <i class="fa fa-comments fa-5x"></i>
+                                        <i class="fa fa-medkit fa-5x"></i>
                                     </div>
                                     <div class="col-xs-6 text-right">
-                                        <p class="announcement-heading">456</p>
-                                        <p class="announcement-text">New Mentions!</p>
+                                        
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="../administrativo/medicos">
                                 <div class="panel-footer announcement-bottom">
                                     <div class="row">
                                         <div class="col-xs-6">
-                                            View Mentions
+                                            Médicos
                                         </div>
                                         <div class="col-xs-6 text-right">
                                             <i class="fa fa-arrow-circle-right"></i>
@@ -109,19 +108,18 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <i class="fa fa-check fa-5x"></i>
+                                        <i class="fa fa-user fa-5x"></i>
                                     </div>
                                     <div class="col-xs-6 text-right">
-                                        <p class="announcement-heading">12</p>
-                                        <p class="announcement-text">To-Do Items</p>
+                                        
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="../administrativo/pacientes">
                                 <div class="panel-footer announcement-bottom">
                                     <div class="row">
                                         <div class="col-xs-6">
-                                            Complete Tasks
+                                            Pacientes
                                         </div>
                                         <div class="col-xs-6 text-right">
                                             <i class="fa fa-arrow-circle-right"></i>
@@ -136,19 +134,18 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <i class="fa fa-tasks fa-5x"></i>
+                                        <i class="fa fa-hospital-o fa-5x"></i>
                                     </div>
                                     <div class="col-xs-6 text-right">
-                                        <p class="announcement-heading">18</p>
-                                        <p class="announcement-text">Crawl Errors</p>
+                                        
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="../administrativo/consultas">
                                 <div class="panel-footer announcement-bottom">
                                     <div class="row">
                                         <div class="col-xs-6">
-                                            Fix Issues
+                                            Agendamentos
                                         </div>
                                         <div class="col-xs-6 text-right">
                                             <i class="fa fa-arrow-circle-right"></i>
@@ -158,33 +155,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <div class="panel panel-success">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <i class="fa fa-comments fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-6 text-right">
-                                        <p class="announcement-heading">56</p>
-                                        <p class="announcement-text">New Orders!</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#">
-                                <div class="panel-footer announcement-bottom">
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            Complete Orders
-                                        </div>
-                                        <div class="col-xs-6 text-right">
-                                            <i class="fa fa-arrow-circle-right"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    
                 </div><!-- /.row -->                
             </div><!-- /#page-wrapper -->
         </div><!-- /#wrapper -->

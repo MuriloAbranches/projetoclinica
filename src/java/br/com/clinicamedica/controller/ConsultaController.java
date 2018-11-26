@@ -1,7 +1,10 @@
 package br.com.clinicamedica.controller;
 
 import br.com.clinicamedica.dao.DataHoraConsultaDao;
+import br.com.clinicamedica.dao.MedicoDao;
 import br.com.clinicamedica.dao.impl.DataHoraConsultaDaoImpl;
+import br.com.clinicamedica.dao.impl.MedicoDaoImpl;
+import br.com.clinicamedica.model.Consulta;
 import br.com.clinicamedica.model.DataHoraConsulta;
 import br.com.clinicamedica.model.Medico;
 import br.com.clinicamedica.model.Paciente;
@@ -56,11 +59,11 @@ public class ConsultaController extends HttpServlet {
                 response.sendRedirect("administrativo/consultas");
 
             } else if (opcao.equals("buscarPaciente")) {
-                
+
                 Paciente buscaPaciente = pacienteService.buscarPaciente(request, response);
 
                 List<Medico> listaMedicos = medicoService.buscarMedicoPorEspecialidade(request, response);
-                
+
                 DataHoraConsultaDao dataHoraConsultaDao = new DataHoraConsultaDaoImpl();
                 List<DataHoraConsulta> listaDataHora = dataHoraConsultaDao.readDataHoraConsultaByFlagAtivo();
 
@@ -70,10 +73,26 @@ public class ConsultaController extends HttpServlet {
                 request.setAttribute("listaDataHora", listaDataHora);
                 request.setAttribute("especialidade", especialidade);
                 RequestDispatcher rd = request.getRequestDispatcher("adminpages/agendarConsulta.jsp");
-                
+
                 rd.forward(request, response);
 
+            } else if (opcao.equals("buscar")) {
+
+                Consulta buscaConsulta = consultaService.buscarConsulta(request, response);
+                MedicoDao medicoDao = new MedicoDaoImpl();
+                List<Medico> listaMedicos = medicoDao.listMedicoByEspecialidade(buscaConsulta.getEspecialidade());
+                
+                DataHoraConsultaDao dataHoraConsultaDao = new DataHoraConsultaDaoImpl();
+                List<DataHoraConsulta> listaDataHora = dataHoraConsultaDao.readDataHoraById(buscaConsulta.getDataHoraConsulta());
+                
+                request.setAttribute("buscaConsulta", buscaConsulta);
+                request.setAttribute("listaMedicos", listaMedicos);
+                request.setAttribute("listaDataHora", listaDataHora);
+                RequestDispatcher rd = request.getRequestDispatcher("adminpages/buscaConsulta.jsp");
+
+                rd.forward(request, response);
             }
+            
         } catch (Exception e) {
             System.out.println("ERRO(ConsultaController): " + e.getMessage());
             e.printStackTrace();

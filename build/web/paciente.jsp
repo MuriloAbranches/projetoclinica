@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -45,7 +44,7 @@
                         </div>
                     </div>
                 </nav>
-                 <div class="container">
+                <div class="container">
                     <div class="row">
                         <div class="banner-info">
                             <div class="banner-logo text-center">
@@ -62,7 +61,7 @@
                         </div>
                     </div>
                 </div>
-           </div>
+            </div>
         </section>
         <!--/ banner-->
         <!--service-->
@@ -129,7 +128,7 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris cillum.</p>
                     </div>
                     <div class="col-md-8 col-sm-8">
-          
+
                         <form method="get" action="">
                             <div class="form-group col-md-12 col-sm-12">
                                 <label>Buscar por Data:
@@ -155,7 +154,7 @@
                                                 <td>15:00</td>
                                                 <td>Dermatologia</td>
                                                 <td>João Silva</td>
-                  
+
                                                 <td>
                                                     <button>Excluir</button>
                                                 </td>
@@ -220,8 +219,8 @@
                             </div>
                         </form>
                     </div>
-                    
-                    
+
+
                 </div>
             </div>
         </section>
@@ -236,37 +235,37 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris cillum.</p>
                     </div>
                     <div class="col-md-8 col-sm-8">
-                                              
+
                         <form method="get" action="">
-                            
+
                             <div class="form-group col-md-6 col-sm-6">
-                            <label>Especialidade</label>
-                            <select class="form-control">
-                                <option>Ortopedia</option>
-                                <option>Oftalmologia</option>
-                                <option>Ginecologia</option>
-                                <option>Geriatria</option>
-                                <option>Cardiologia</option>
-                            </select>
-                        </div>
-                         <div class="form-group col-md-6 col-sm-6">
-                            <label>Médico</label>
-                            <select class="form-control">
-                                <option>João</option>
-                                <option>Maria</option>
-                                <option>José</option>
-                                <option>Bruna</option>
-                                <option>Ana</option>
-                            </select>
-                        </div>
-                             <div  class="form-action col-md-12 col-sm-12">
-                            <button type="submit" class="btn btn-default">Salvar</button>
-                        </div>
+                                <label>Especialidade</label>
+                                <select class="form-control">
+                                    <option>Ortopedia</option>
+                                    <option>Oftalmologia</option>
+                                    <option>Ginecologia</option>
+                                    <option>Geriatria</option>
+                                    <option>Cardiologia</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label>Médico</label>
+                                <select class="form-control">
+                                    <option>João</option>
+                                    <option>Maria</option>
+                                    <option>José</option>
+                                    <option>Bruna</option>
+                                    <option>Ana</option>
+                                </select>
+                            </div>
+                            <div  class="form-action col-md-12 col-sm-12">
+                                <button type="submit" class="btn btn-default">Salvar</button>
+                            </div>
                         </form>
-                        
-                        
+
+
                     </div>
-                    
+
                 </div>
             </div>
         </section>
