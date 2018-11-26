@@ -26,6 +26,22 @@
 
     <body>
 
+         <%
+            String PC_login = null;
+            HttpSession PC_sessao = request.getSession(false);
+            if (PC_sessao != null) {
+
+                PC_login = (String) PC_sessao.getAttribute("Login");
+                if (PC_login == null) {
+                    PC_sessao.setAttribute("mensagem", "Acesso proibido sem login!");
+                    response.sendRedirect("index.html");
+                }
+            } else {
+                PC_sessao.removeAttribute("mensagem");
+                PC_sessao.removeAttribute("Login");
+            }
+        %>
+        
         <div id="wrapper">
 
             <!-- Sidebar -->
@@ -54,7 +70,7 @@
                     <!--Mensagens -->
                     <ul class="nav navbar-nav navbar-right navbar-user">
                         <li class="dropdown user-dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= PC_login %> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#"><i class="fa fa-user"></i> Perfil</a></li>
                                 <li><a href="#"><i class="fa fa-envelope"></i> Inbox</a></li>
@@ -182,20 +198,20 @@
         </div><!-- /#wrapper -->
 
         <!-- JavaScript -->
-        <script src="js/jquery-1.10.2.js"></script>
-        <script src="js/bootstrap.js"></script>
+        <script src="../adminpages/js/jquery-1.10.2.js"></script>
+        <script src="../adminpages/js/bootstrap.js"></script>
 
         <!-- Page Specific Plugins -->
         <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
         <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
-        <script src="js/morris/chart-data-morris.js"></script>
-        <script src="js/tablesorter/jquery.tablesorter.js"></script>
-        <script src="js/tablesorter/tables.js"></script>
+        <script src="../adminpages/js/morris/chart-data-morris.js"></script>
+        <script src="../adminpages/js/tablesorter/jquery.tablesorter.js"></script>
+        <script src="../adminpages/js/tablesorter/tables.js"></script>
         <!--[if lte IE 8]><script src="js/excanvas.min.js"></script><![endif]-->
-        <script src="js/flot/jquery.flot.js"></script>
-        <script src="js/flot/jquery.flot.tooltip.min.js"></script>
-        <script src="js/flot/jquery.flot.resize.js"></script>
-        <script src="js/flot/jquery.flot.pie.js"></script>
-        <script src="js/flot/chart-data-flot.js"></script>
+        <script src="../adminpages/js/flot/jquery.flot.js"></script>
+        <script src="../adminpages/js/flot/jquery.flot.tooltip.min.js"></script>
+        <script src="../adminpages/js/flot/jquery.flot.resize.js"></script>
+        <script src="../adminpages/js/flot/jquery.flot.pie.js"></script>
+        <script src="../adminpages/js/flot/chart-data-flot.js"></script>
     </body>
 </html>
