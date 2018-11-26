@@ -85,9 +85,6 @@ CREATE TABLE DATA_HORA_CONSULTAS(
 	CONSTRAINT pk_data_hora_consultas PRIMARY KEY (id)
 );
 
-select data_consulta, hora_consulta from DATA_HORA_CONSULTAS where flag_ativo = 1;
-SELECT func.nome, med.crm, esp.nome FROM MEDICOS med, FUNCIONARIOS func, ESPECIALIDADES esp WHERE (func.id = med.funcionario)and (med.especialidade = esp.id) and (esp.nome = 'Ginecologia') and (med.flag_ativo = 1 );
-update data_hora_consultas set flag_ativo = 1;
 
 INSERT INTO DATA_HORA_CONSULTAS VALUES
 (nextval('data_hora_consultas_seq'), '25/11/2018', '12:00', 1),
@@ -123,7 +120,7 @@ SELECT * FROM ESPECIALIDADES;
 SELECT * FROM FUNCIONARIOS;
 SELECT * FROM CONSULTAS;
 SELECT * FROM MEDICOS;
-SELECT * FROM DATA_HORA_CONSULTAS where id= 5;
+SELECT * FROM DATA_HORA_CONSULTAS
 
 --Drop
 DROP TABLE CONTATOS;

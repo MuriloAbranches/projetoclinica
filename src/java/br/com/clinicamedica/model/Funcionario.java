@@ -1,28 +1,8 @@
 package br.com.clinicamedica.model;
 
-import java.util.Date;
-
 public class Funcionario extends Pessoa {
 
-    private Date dataAdmissao;
-    private Date dataDemissao;
     private TipoFuncionario cargo;
-
-    public Date getDataAdmissao() {
-        return dataAdmissao;
-    }
-
-    public void setDataAdmissao(Date dataAdmissao) {
-        this.dataAdmissao = dataAdmissao;
-    }
-
-    public Date getDataDemissao() {
-        return dataDemissao;
-    }
-
-    public void setDataDemissao(Date dataDemissao) {
-        this.dataDemissao = dataDemissao;
-    }
 
     public TipoFuncionario getCargo() {
         return cargo;
@@ -35,9 +15,8 @@ public class Funcionario extends Pessoa {
     public Funcionario() {
     }
 
-    public Funcionario(Date dataAdmissao, Date dataDemissao, TipoFuncionario cargo) {
-        this.dataAdmissao = dataAdmissao;
-        this.dataDemissao = dataDemissao;
+    public Funcionario(TipoFuncionario cargo) {
+
         this.cargo = cargo;
     }
 

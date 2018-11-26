@@ -1,7 +1,5 @@
 package br.com.clinicamedica.model;
 
-import java.util.Date;
-
 public class Medico extends Funcionario {
 
     private long crm;
@@ -26,8 +24,8 @@ public class Medico extends Funcionario {
     public Medico() {
     }
 
-    public Medico(long crm, Especialidade especialidade, Date dataAdmissao, Date dataDemissao, TipoFuncionario cargo) {
-        super(dataAdmissao, dataDemissao, cargo);
+    public Medico(long crm, Especialidade especialidade,TipoFuncionario cargo) {
+        super(cargo);
         this.crm = crm;
         this.especialidade = especialidade;
     }

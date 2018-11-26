@@ -21,26 +21,73 @@ public class PacienteServiceImpl implements PacienteService {
     private EnderecoDao enderecoDao;
     private ContatoDao contatoDao;
 
+    // Método responsável por Receber request e salvar no BD
     @Override
     public boolean salvarPaciente(HttpServletRequest request, HttpServletResponse response) {
 
         try {
-            Paciente paciente = castRequestToPaciente(request);
 
+            //Telefone
+            Telefone telefone = new Telefone();
+
+            telefone.setDdd(Integer.parseInt(request.getParameter("ddd")));
+            telefone.setNumero(Integer.parseInt(request.getParameter("telefone")));
+
+            //Contato
+            Contato contato = new Contato();
+
+            contato.setEmail(request.getParameter("email").toLowerCase());
+            contato.setTelefone(telefone);
+
+            //Endereco
+            Endereco endereco = new Endereco();
+
+            endereco.setCep(Integer.parseInt(request.getParameter("cep")));
+            endereco.setLogradouro(request.getParameter("logradouro"));
+            endereco.setNumero(Integer.parseInt(request.getParameter("numero")));
+            endereco.setBairro(request.getParameter("bairro"));
+            endereco.setCidade(request.getParameter("cidade"));
+            endereco.setEstado(request.getParameter("estado"));
+
+            //Paciente
+            Paciente paciente = new Paciente();
+
+            paciente.setNomeCompleto(request.getParameter("nomeCompleto").toUpperCase());
+            paciente.setCpf(Long.parseLong(request.getParameter("cpf")));
+            paciente.setRg(Long.parseLong(request.getParameter("rg")));
+
+            //PacienteDao
             pacienteDao = new PacienteDaoImpl();
 
-            if (null == pacienteDao.readPaciente(paciente)) {
+            if (null == pacienteDao.readPaciente(paciente)) { //Verifica se existe Paciente no BD
 
-                paciente.setEndereco(saveEndereco(castRequestToEndereco(request)));
-                paciente.setContato(saveContato(castRequestToContato(request)));
+                //ContatoDao
+                contatoDao = new ContatoDaoImpl();
+
+                contato.setFlagAtivo(1);
+                contatoDao.createContato(contato); //Cria Contato no BD
+
+                contato = contatoDao.readContatoByEmail(contato); //Busca Contato no BD
+
+                //EnderecoDao
+                enderecoDao = new EnderecoDaoImpl();
+
+                endereco.setFlagAtivo(1);
+                enderecoDao.createEndereco(endereco); //Cria Endereco no BD
+
+                endereco = enderecoDao.readEnderecoByCep(endereco); // Busca Endereco no BD
+
+                //Preenche Paciente
+                paciente.setEndereco(endereco);
+                paciente.setContato(contato);
                 paciente.setFlagAtivo(1);
 
-                pacienteDao.createPaciente(paciente);
+                pacienteDao.createPaciente(paciente); //Cria Paciente no BD
 
             } else {
                 paciente.setFlagAtivo(1);
 
-                pacienteDao.activatePaciente(paciente);
+                pacienteDao.activatePaciente(paciente); //Ativa Paciente no BD
             }
 
             return true;
@@ -51,6 +98,7 @@ public class PacienteServiceImpl implements PacienteService {
         }
     }
 
+    // Método responsável por recuperar a lista de Pacientes no BD
     @Override
     public List<Paciente> listarPaciente() {
         try {
@@ -66,6 +114,7 @@ public class PacienteServiceImpl implements PacienteService {
         }
     }
 
+    // Método responsável por recuperar um Pacientes no BD
     @Override
     public Paciente buscarPaciente(HttpServletRequest request, HttpServletResponse response) {
         try {
@@ -88,17 +137,49 @@ public class PacienteServiceImpl implements PacienteService {
         }
     }
 
+    // Método responsável por atualizar um Pacientes no BD
     @Override
     public boolean alterarPaciente(HttpServletRequest request, HttpServletResponse response) {
         try {
 
-            Paciente paciente = castRequestToPaciente(request);
+            //Paciente
+            Paciente paciente = new Paciente();
+
+            paciente.setNomeCompleto(request.getParameter("nomeCompleto").toUpperCase());
+            paciente.setCpf(Long.parseLong(request.getParameter("cpf")));
+
             pacienteDao = new PacienteDaoImpl();
             pacienteDao.updatePaciente(paciente);
             paciente = pacienteDao.readPaciente(paciente);
 
-            updateEndereco(castRequestToEndereco(request), paciente);
-            updateContato(castRequestToContato(request), paciente);
+            //Endereco
+            Endereco endereco = new Endereco();
+
+            endereco.setCep(Integer.parseInt(request.getParameter("cep")));
+            endereco.setLogradouro(request.getParameter("logradouro"));
+            endereco.setNumero(Integer.parseInt(request.getParameter("numero")));
+            endereco.setBairro(request.getParameter("bairro"));
+            endereco.setCidade(request.getParameter("cidade"));
+            endereco.setEstado(request.getParameter("estado"));
+
+            enderecoDao = new EnderecoDaoImpl();
+            endereco.setId(paciente.getEndereco().getId());
+            enderecoDao.updateEndereco(endereco);
+
+            //Contato
+            Telefone telefone = new Telefone();
+
+            telefone.setDdd(Integer.parseInt(request.getParameter("ddd")));
+            telefone.setNumero(Integer.parseInt(request.getParameter("telefone")));
+
+            Contato contato = new Contato();
+
+            contato.setEmail(request.getParameter("email").toLowerCase());
+            contato.setTelefone(telefone);
+
+            contatoDao = new ContatoDaoImpl();
+            contato.setId(paciente.getContato().getId());
+            contatoDao.updateContato(contato);
 
             return true;
         } catch (Exception e) {
@@ -110,6 +191,7 @@ public class PacienteServiceImpl implements PacienteService {
     @Override
     public boolean excluirPaciente(HttpServletRequest request, HttpServletResponse response) {
         try {
+            //Paciente
             Paciente paciente = new Paciente();
             paciente.setCpf(Long.parseLong(request.getParameter("cpf")));
 
@@ -120,8 +202,22 @@ public class PacienteServiceImpl implements PacienteService {
 
             if (pacienteDao.deletePaciente(paciente)) {
 
-                deleteContato(paciente);
-                deleteEndereco(paciente);
+                //Contato
+                Contato contato = new Contato();
+
+                contato.setFlagAtivo(0);
+                contato.setId(paciente.getContato().getId());
+                contatoDao = new ContatoDaoImpl();
+                contatoDao.deleteContato(contato);
+
+                //Endereco
+                Endereco endereco = new Endereco();
+
+                endereco.setFlagAtivo(0);
+                endereco.setId(paciente.getEndereco().getId());
+                enderecoDao = new EnderecoDaoImpl();
+                enderecoDao.deleteEndereco(endereco);
+
             }
 
             return true;
@@ -131,108 +227,4 @@ public class PacienteServiceImpl implements PacienteService {
         }
 
     }
-
-    private Endereco castRequestToEndereco(HttpServletRequest request) {
-
-        Endereco endereco = new Endereco();
-
-        endereco.setCep(Integer.parseInt(request.getParameter("cep")));
-        endereco.setLogradouro(request.getParameter("logradouro"));
-        endereco.setNumero(Integer.parseInt(request.getParameter("numero")));
-        endereco.setBairro(request.getParameter("bairro"));
-        endereco.setCidade(request.getParameter("cidade"));
-        endereco.setEstado(request.getParameter("estado"));
-
-        return endereco;
-    }
-
-    private Contato castRequestToContato(HttpServletRequest request) {
-
-        Telefone telefone = new Telefone();
-
-        telefone.setDdd(Integer.parseInt(request.getParameter("ddd")));
-        telefone.setNumero(Integer.parseInt(request.getParameter("telefone")));
-
-        Contato contato = new Contato();
-
-        contato.setEmail(request.getParameter("email").toLowerCase());
-        contato.setTelefone(telefone);
-
-        return contato;
-    }
-
-    private Paciente castRequestToPaciente(HttpServletRequest request) {
-
-        Paciente paciente = new Paciente();
-
-        paciente.setNomeCompleto(request.getParameter("nomeCompleto").toUpperCase());
-        paciente.setCpf(Long.parseLong(request.getParameter("cpf")));
-        paciente.setRg(Long.parseLong(request.getParameter("rg")));
-
-        return paciente;
-    }
-
-    private Contato saveContato(Contato contato) {
-
-        contatoDao = new ContatoDaoImpl();
-
-        contato.setFlagAtivo(1);
-        contatoDao.createContato(contato);
-
-        contato = contatoDao.readContatoByEmail(contato);
-
-        return contato;
-    }
-
-    private Endereco saveEndereco(Endereco endereco) {
-
-        enderecoDao = new EnderecoDaoImpl();
-
-        endereco.setFlagAtivo(1);
-        enderecoDao.createEndereco(endereco);
-
-        endereco = enderecoDao.readEnderecoByCep(endereco);
-
-        return endereco;
-    }
-
-    private void updateContato(Contato contato, Paciente paciente) {
-
-        contatoDao = new ContatoDaoImpl();
-
-        contato.setId(paciente.getContato().getId());
-
-        contatoDao.updateContato(contato);
-
-    }
-
-    private void updateEndereco(Endereco endereco, Paciente paciente) {
-
-        enderecoDao = new EnderecoDaoImpl();
-
-        endereco.setId(paciente.getEndereco().getId());
-
-        enderecoDao.updateEndereco(endereco);
-    }
-
-    private void deleteContato(Paciente paciente) {
-        Contato contato = new Contato();
-
-        contato.setFlagAtivo(0);
-        contato.setId(paciente.getContato().getId());
-        contatoDao = new ContatoDaoImpl();
-
-        contatoDao.deleteContato(contato);
-    }
-
-    private void deleteEndereco(Paciente paciente) {
-        Endereco endereco = new Endereco();
-
-        endereco.setFlagAtivo(0);
-        endereco.setId(paciente.getEndereco().getId());
-        enderecoDao = new EnderecoDaoImpl();
-
-        enderecoDao.deleteEndereco(endereco);
-    }
-
 }

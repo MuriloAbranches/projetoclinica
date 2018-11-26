@@ -31,13 +31,65 @@ public class MedicoServiceImpl implements MedicoService {
     @Override
     public boolean salvarMedico(HttpServletRequest request, HttpServletResponse response) {
         try {
-            Medico medico = castRequestToMedico(request);
+            Medico medico = new Medico();
+
+            medico.setCrm(Long.parseLong(request.getParameter("crm")));
 
             medicoDao = new MedicoDaoImpl();
 
             if (null == medicoDao.readMedico(medico)) {
 
-                Funcionario funcionario = saveFuncionario(castRequestToFuncionario(request), request);
+                Funcionario funcionario = new Funcionario();
+
+                funcionario.setNomeCompleto(request.getParameter("nomeCompleto").toLowerCase());
+                funcionario.setCpf(Long.parseLong(request.getParameter("cpf")));
+                funcionario.setRg(Long.parseLong(request.getParameter("rg")));
+
+                funcionarioDao = new FuncionarioDaoImpl();
+
+                funcionario.setFlagAtivo(1);
+                funcionario.setCargo(TipoFuncionario.MEDICO);
+
+                Endereco endereco = new Endereco();
+
+                endereco.setCep(Integer.parseInt(request.getParameter("cep")));
+                endereco.setLogradouro(request.getParameter("logradouro"));
+                endereco.setNumero(Integer.parseInt(request.getParameter("numero")));
+                endereco.setBairro(request.getParameter("bairro"));
+                endereco.setCidade(request.getParameter("cidade"));
+                endereco.setEstado(request.getParameter("estado"));
+
+                enderecoDao = new EnderecoDaoImpl();
+
+                endereco.setFlagAtivo(1);
+                enderecoDao.createEndereco(endereco);
+
+                endereco = enderecoDao.readEnderecoByCep(endereco);
+
+                Telefone telefone = new Telefone();
+
+                telefone.setDdd(Integer.parseInt(request.getParameter("ddd")));
+                telefone.setNumero(Integer.parseInt(request.getParameter("telefone"))); //numero
+
+                Contato contato = new Contato();
+
+                contato.setEmail(request.getParameter("email").toLowerCase());
+                contato.setTelefone(telefone);
+
+                contatoDao = new ContatoDaoImpl();
+
+                contato.setFlagAtivo(1);
+                contatoDao.createContato(contato);
+
+                contato = contatoDao.readContatoByEmail(contato);
+
+                funcionario.setEndereco(endereco);
+                funcionario.setContato(contato);
+
+                funcionarioDao.createFuncionario(funcionario);
+
+                funcionario = funcionarioDao.readFuncionario(funcionario);
+
                 medico.setFlagAtivo(1);
                 medico.setId(funcionario.getId());
 
@@ -140,10 +192,55 @@ public class MedicoServiceImpl implements MedicoService {
     @Override
     public boolean alterarMedico(HttpServletRequest request, HttpServletResponse response) {
         try {
-            Medico medico = castRequestToMedico(request);
+            Medico medico = new Medico();
+
+            medico.setCrm(Long.parseLong(request.getParameter("crm")));
+
             medicoDao = new MedicoDaoImpl();
 
-            Funcionario funcionario = updateFuncionario(castRequestToFuncionario(request), request);
+            Funcionario funcionario = new Funcionario();
+
+            funcionario.setNomeCompleto(request.getParameter("nomeCompleto").toLowerCase());
+            funcionario.setCpf(Long.parseLong(request.getParameter("cpf")));
+            funcionario.setRg(Long.parseLong(request.getParameter("rg")));
+
+            funcionarioDao = new FuncionarioDaoImpl();
+            funcionario.setCargo(TipoFuncionario.MEDICO);
+
+            funcionarioDao.updateFuncionario(funcionario);
+
+            funcionario = funcionarioDao.readFuncionario(funcionario);
+
+            Endereco endereco = new Endereco();
+
+            endereco.setCep(Integer.parseInt(request.getParameter("cep")));
+            endereco.setLogradouro(request.getParameter("logradouro"));
+            endereco.setNumero(Integer.parseInt(request.getParameter("numero")));
+            endereco.setBairro(request.getParameter("bairro"));
+            endereco.setCidade(request.getParameter("cidade"));
+            endereco.setEstado(request.getParameter("estado"));
+
+            enderecoDao = new EnderecoDaoImpl();
+
+            endereco.setId(funcionario.getEndereco().getId());
+
+            enderecoDao.updateEndereco(endereco);
+
+            Telefone telefone = new Telefone();
+
+            telefone.setDdd(Integer.parseInt(request.getParameter("ddd")));
+            telefone.setNumero(Integer.parseInt(request.getParameter("telefone"))); //numero
+
+            Contato contato = new Contato();
+
+            contato.setEmail(request.getParameter("email").toLowerCase());
+            contato.setTelefone(telefone);
+
+            contatoDao = new ContatoDaoImpl();
+
+            contato.setId(funcionario.getContato().getId());
+
+            contatoDao.updateContato(contato);
 
             medico.setId(funcionario.getId());
 
@@ -175,7 +272,32 @@ public class MedicoServiceImpl implements MedicoService {
 
             if (medicoDao.deleteMedico(medico)) {
 
-                deleteFuncionario(medico);
+                Funcionario funcionario = new Funcionario();
+                funcionario.setId(medico.getId());
+
+                funcionarioDao = new FuncionarioDaoImpl();
+                funcionario = funcionarioDao.findFuncionarioById(funcionario);
+
+                funcionario.setFlagAtivo(0);
+
+                funcionarioDao.deleteFuncionario(funcionario);
+
+                Contato contato = new Contato();
+
+                contato.setFlagAtivo(0);
+                contato.setId(funcionario.getContato().getId());
+                contatoDao = new ContatoDaoImpl();
+
+                contatoDao.deleteContato(contato);
+
+                Endereco endereco = new Endereco();
+
+                endereco.setFlagAtivo(0);
+                endereco.setId(funcionario.getEndereco().getId());
+                enderecoDao = new EnderecoDaoImpl();
+
+                enderecoDao.deleteEndereco(endereco);
+
             }
 
             return true;
@@ -183,168 +305,6 @@ public class MedicoServiceImpl implements MedicoService {
             System.out.println("ERRO: " + e.getMessage());
             return false;
         }
-    }
-
-    private Endereco castRequestToEndereco(HttpServletRequest request) {
-
-        Endereco endereco = new Endereco();
-
-        endereco.setCep(Integer.parseInt(request.getParameter("cep")));
-        endereco.setLogradouro(request.getParameter("logradouro"));
-        endereco.setNumero(Integer.parseInt(request.getParameter("numero")));
-        endereco.setBairro(request.getParameter("bairro"));
-        endereco.setCidade(request.getParameter("cidade"));
-        endereco.setEstado(request.getParameter("estado"));
-
-        return endereco;
-    }
-
-    private Contato castRequestToContato(HttpServletRequest request) {
-
-        Telefone telefone = new Telefone();
-
-        telefone.setDdd(Integer.parseInt(request.getParameter("ddd")));
-        telefone.setNumero(Integer.parseInt(request.getParameter("telefone"))); //numero
-
-        Contato contato = new Contato();
-
-        contato.setEmail(request.getParameter("email").toLowerCase());
-        contato.setTelefone(telefone);
-
-        return contato;
-    }
-
-    private Funcionario castRequestToFuncionario(HttpServletRequest request) {
-
-        Funcionario funcionario = new Funcionario();
-
-        funcionario.setNomeCompleto(request.getParameter("nomeCompleto").toLowerCase());
-        funcionario.setCpf(Long.parseLong(request.getParameter("cpf")));
-        funcionario.setRg(Long.parseLong(request.getParameter("rg")));
-
-        return funcionario;
-    }
-
-    private Medico castRequestToMedico(HttpServletRequest request) {
-
-        Medico medico = new Medico();
-
-        medico.setCrm(Long.parseLong(request.getParameter("crm")));
-
-        return medico;
-    }
-
-    private Contato saveContato(Contato contato) {
-
-        contatoDao = new ContatoDaoImpl();
-
-        contato.setFlagAtivo(1);
-        contatoDao.createContato(contato);
-
-        contato = contatoDao.readContatoByEmail(contato);
-
-        return contato;
-    }
-
-    private Endereco saveEndereco(Endereco endereco) {
-
-        enderecoDao = new EnderecoDaoImpl();
-
-        endereco.setFlagAtivo(1);
-        enderecoDao.createEndereco(endereco);
-
-        endereco = enderecoDao.readEnderecoByCep(endereco);
-
-        return endereco;
-    }
-
-    private Funcionario saveFuncionario(Funcionario funcionario, HttpServletRequest request) {
-
-        funcionarioDao = new FuncionarioDaoImpl();
-
-        funcionario.setFlagAtivo(1);
-        funcionario.setCargo(TipoFuncionario.MEDICO);
-        funcionario.setEndereco(saveEndereco(castRequestToEndereco(request)));
-        funcionario.setContato(saveContato(castRequestToContato(request)));
-
-        funcionarioDao.createFuncionario(funcionario);
-
-        funcionario = funcionarioDao.readFuncionario(funcionario);
-
-        return funcionario;
-    }
-
-    private Funcionario updateFuncionario(Funcionario funcionario, HttpServletRequest request) {
-
-        funcionarioDao = new FuncionarioDaoImpl();
-        funcionario.setCargo(TipoFuncionario.MEDICO);
-
-        funcionarioDao.updateFuncionario(funcionario);
-
-        funcionario = funcionarioDao.readFuncionario(funcionario);
-
-        updateEndereco(castRequestToEndereco(request), funcionario);
-        updateContato(castRequestToContato(request), funcionario);
-
-        return funcionario;
-    }
-
-    private Contato updateContato(Contato contato, Funcionario funcionario) {
-
-        funcionario = funcionarioDao.readFuncionario(funcionario);
-        contatoDao = new ContatoDaoImpl();
-
-        contato.setId(funcionario.getContato().getId());
-
-        contatoDao.updateContato(contato);
-
-        return contato;
-    }
-
-    private Endereco updateEndereco(Endereco endereco, Funcionario funcionario) {
-
-        funcionario = funcionarioDao.readFuncionario(funcionario);
-        enderecoDao = new EnderecoDaoImpl();
-
-        endereco.setId(funcionario.getEndereco().getId());
-
-        enderecoDao.updateEndereco(endereco);
-
-        return endereco;
-    }
-
-    private void deleteContato(Funcionario funcionario) {
-        Contato contato = new Contato();
-
-        contato.setFlagAtivo(0);
-        contato.setId(funcionario.getContato().getId());
-        contatoDao = new ContatoDaoImpl();
-
-        contatoDao.deleteContato(contato);
-    }
-
-    private void deleteEndereco(Funcionario funcionario) {
-        Endereco endereco = new Endereco();
-
-        endereco.setFlagAtivo(0);
-        endereco.setId(funcionario.getEndereco().getId());
-        enderecoDao = new EnderecoDaoImpl();
-
-        enderecoDao.deleteEndereco(endereco);
-    }
-
-    private void deleteFuncionario(Medico medico) {
-        Funcionario funcionario = new Funcionario();
-        funcionario.setId(medico.getId());
-
-        funcionarioDao = new FuncionarioDaoImpl();
-        funcionario = funcionarioDao.findFuncionarioById(funcionario);
-
-        funcionario.setFlagAtivo(0);
-
-        funcionarioDao.deleteFuncionario(funcionario);
-        deleteEndereco(funcionario);
-        deleteContato(funcionario);
     }
 
     @Override

@@ -33,7 +33,6 @@ public class PacienteController extends HttpServlet {
 
             if (opcao.equals("salvar")) {
                 pacienteService.salvarPaciente(request, response);
-                //response.sendRedirect("adminpages/index.jsp");
                 response.sendRedirect("administrativo/pacientes");
 
             } else if (opcao.equals("alterar")) {

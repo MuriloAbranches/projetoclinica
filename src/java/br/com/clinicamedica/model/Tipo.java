@@ -17,7 +17,4 @@ public abstract class Tipo {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
-    public void obtercargo(){        
-        
-    }
 }
