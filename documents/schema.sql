@@ -27,6 +27,14 @@ CREATE TABLE ESPECIALIDADES(
 	CONSTRAINT pk_especialidades PRIMARY KEY (id)
 );
 
+CREATE TABLE DATA_HORA_CONSULTAS(
+	id integer,
+	data_consulta varchar,
+	hora_consulta varchar,
+	flag_ativo integer,
+	CONSTRAINT pk_data_hora_consultas PRIMARY KEY (id)
+);
+
 CREATE TABLE PACIENTES(
 	id integer,
 	nome varchar,
@@ -77,30 +85,41 @@ CREATE TABLE CONSULTAS(
     CONSTRAINT fk_data_hora_consulta_consultas FOREIGN KEY (data_hora_consulta) REFERENCES DATA_HORA_CONSULTAS(id)
 );
 
-CREATE TABLE DATA_HORA_CONSULTAS(
-	id integer,
-	data_consulta varchar,
-	hora_consulta varchar,
-	flag_ativo integer,
-	CONSTRAINT pk_data_hora_consultas PRIMARY KEY (id)
-);
+
 
 
 INSERT INTO DATA_HORA_CONSULTAS VALUES
-(nextval('data_hora_consultas_seq'), '25/11/2018', '12:00', 1),
-(nextval('data_hora_consultas_seq'), '25/11/2018', '12:30', 1),
-(nextval('data_hora_consultas_seq'), '25/11/2018', '13:00', 1),
-(nextval('data_hora_consultas_seq'), '25/11/2018', '13:30', 1),
-(nextval('data_hora_consultas_seq'), '25/11/2018', '15:00', 1),
-(nextval('data_hora_consultas_seq'), '25/11/2018', '15:30', 1);
+(nextval('data_hora_consultas_seq'), '28/11/2018', '12:00', 1),
+(nextval('data_hora_consultas_seq'), '28/11/2018', '12:30', 1),
+(nextval('data_hora_consultas_seq'), '28/11/2018', '13:00', 1),
+(nextval('data_hora_consultas_seq'), '28/11/2018', '13:30', 1),
+(nextval('data_hora_consultas_seq'), '28/11/2018', '15:00', 1),
+(nextval('data_hora_consultas_seq'), '28/11/2018', '15:30', 1),
+(nextval('data_hora_consultas_seq'), '28/11/2018', '16:00', 1),
+(nextval('data_hora_consultas_seq'), '28/11/2018', '16:30', 1),
+(nextval('data_hora_consultas_seq'), '28/11/2018', '17:00', 1),
+(nextval('data_hora_consultas_seq'), '29/11/2018', '12:00', 1),
+(nextval('data_hora_consultas_seq'), '29/11/2018', '12:30', 1),
+(nextval('data_hora_consultas_seq'), '29/11/2018', '13:30', 1),
+(nextval('data_hora_consultas_seq'), '29/11/2018', '15:00', 1),
+(nextval('data_hora_consultas_seq'), '29/11/2018', '15:30', 1),
+(nextval('data_hora_consultas_seq'), '29/11/2018', '16:00', 1),
+(nextval('data_hora_consultas_seq'), '29/11/2018', '16:30', 1),
+(nextval('data_hora_consultas_seq'), '29/11/2018', '17:00', 1);
 
-INSERT INTO DATA_HORA_CONSULTAS VALUES (nextval('data_hora_consultas_seq'), '25/11/2018', '14:30', 0);
 
 --Insert especialidades
 INSERT INTO ESPECIALIDADES VALUES 
 (nextval('especialidades_seq'),'Cardiologia',1),
 (nextval('especialidades_seq'),'Pediatria',1),
 (nextval('especialidades_seq'),'Ginecologia',1);
+(nextval('especialidades_seq'),'Cardiologia',1),
+(nextval('especialidades_seq'),'Oftalmologia',1),
+(nextval('especialidades_seq'),'Ginecologia',1),
+(nextval('especialidades_seq'),'Dermatologia',1),
+(nextval('especialidades_seq'),'Ortopedia',1),
+(nextval('especialidades_seq'),'Geriatria',1);
+
 
 --Sequences
 CREATE SEQUENCE pacientes_seq;
@@ -108,7 +127,6 @@ CREATE SEQUENCE enderecos_seq;
 CREATE SEQUENCE contatos_seq;
 CREATE SEQUENCE funcionarios_seq;
 CREATE SEQUENCE especialidades_seq;
-CREATE SEQUENCE medicos_seq;
 CREATE SEQUENCE consultas_seq;
 CREATE SEQUENCE data_hora_consultas_seq;
 

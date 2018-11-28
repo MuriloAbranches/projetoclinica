@@ -115,8 +115,8 @@
                                     <input name="cpf" type="text" id="cpf" size="25"  maxlength="11" class="form-control"/></label>
                                 <label>RG:
                                     <input name="rg" type="text" id="rg" size="26" class="form-control" /></label><br />
-                                <label>Data Nascimento:
-                                    <input name="dataNascimento" type="text" id="dataNascimento" size="25" class="form-control" placeholder="dd/mm/aaaa" /></label><br /><br />
+                                <!--<label>Data Nascimento: -->
+                                    <input name="dataNascimento" type="hidden" id="dataNascimento" size="25" class="form-control" placeholder="dd/mm/aaaa"  /></label><br /><br />
                                 <label>Contato:</label><br />
                                 <label>DDD:
                                     <input name="ddd" type="tel" id="ddd" size="1" maxlength="2"  class="form-control" /></label> 

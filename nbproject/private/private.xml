@@ -3,11 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Pichau/Documents/projetoclinica/src/java/br/com/clinicamedica/controller/AutenticadorController.java</file>
-            <file>file:/C:/Users/Pichau/Documents/projetoclinica/web/adminpages/pacienteAdm.jsp</file>
-            <file>file:/C:/Users/Pichau/Documents/projetoclinica/web/adminpages/medicoAdm.jsp</file>
-            <file>file:/C:/Users/Pichau/Documents/projetoclinica/web/adminpages/agendamentoAdm.jsp</file>
-            <file>file:/C:/Users/Pichau/Documents/projetoclinica/web/adminpages/index.jsp</file>
+            <file>file:/C:/Users/Pichau/Documents/projetoclinica/src/java/br/com/clinicamedica/dao/impl/MedicoDaoImpl.java</file>
         </group>
     </open-files>
 </project-private>
