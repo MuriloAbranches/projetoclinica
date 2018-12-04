@@ -9,6 +9,7 @@ import br.com.clinicamedica.dao.impl.EnderecoDaoImpl;
 import br.com.clinicamedica.dao.impl.FuncionarioDaoImpl;
 import br.com.clinicamedica.dao.impl.MedicoDaoImpl;
 import br.com.clinicamedica.model.Contato;
+import br.com.clinicamedica.model.Email;
 import br.com.clinicamedica.model.Endereco;
 import br.com.clinicamedica.model.Especialidade;
 import br.com.clinicamedica.model.Funcionario;
@@ -16,6 +17,7 @@ import br.com.clinicamedica.model.Medico;
 import br.com.clinicamedica.model.Telefone;
 import br.com.clinicamedica.model.TipoFuncionario;
 import br.com.clinicamedica.service.MedicoService;
+import br.com.clinicamedica.util.EmailUtil;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -99,6 +101,13 @@ public class MedicoServiceImpl implements MedicoService {
                 medico.setEspecialidade(especialidade);
 
                 medicoDao.createMedico(medico);
+                
+                Email email = new Email();
+                email.setEmail(contato.getEmail());
+                email.setNome(funcionario.getNomeCompleto());
+
+                EmailUtil emailUtil = new EmailUtil();
+                emailUtil.enviarNotificaoCadastro(email);
 
             } else {
                 medico.setFlagAtivo(1);
@@ -106,6 +115,10 @@ public class MedicoServiceImpl implements MedicoService {
                 medicoDao.activateMedico(medico);
             }
 
+          
+            
+            
+            
             return true;
 
         } catch (Exception e) {

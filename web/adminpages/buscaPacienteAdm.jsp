@@ -103,8 +103,6 @@
                                     <input name="cpf" type="text" size="25"  maxlength="11" class="form-control" value="<%= buscaPaciente.getCpf()%>" readonly/></label>
                                 <label>RG:
                                     <input name="rg" type="text" size="26" class="form-control" value="<%= buscaPaciente.getRg()%>" readonly/></label><br />
-                                <label>Data Nascimento:
-                                    <input name="dataNascimento" type="text" size="25" class="form-control" placeholder="dd/mm/aaaa" /></label><br /><br />
                                 <label>Contato:</label><br />
                                 <label>DDD:
                                     <input name="ddd" type="tel" size="1" maxlength="2"  class="form-control" value="<%= buscaPaciente.getContato().getTelefone().getDdd()%>" /></label> 

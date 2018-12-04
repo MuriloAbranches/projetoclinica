@@ -1,21 +1,26 @@
 package br.com.clinicamedica.service.impl;
 
 import br.com.clinicamedica.dao.ConsultaDao;
+import br.com.clinicamedica.dao.ContatoDao;
 import br.com.clinicamedica.dao.DataHoraConsultaDao;
 import br.com.clinicamedica.dao.EspecialidadeDao;
 import br.com.clinicamedica.dao.MedicoDao;
 import br.com.clinicamedica.dao.PacienteDao;
 import br.com.clinicamedica.dao.impl.ConsultaDaoImpl;
+import br.com.clinicamedica.dao.impl.ContatoDaoImpl;
 import br.com.clinicamedica.dao.impl.DataHoraConsultaDaoImpl;
 import br.com.clinicamedica.dao.impl.EspecialidadeDaoImpl;
 import br.com.clinicamedica.dao.impl.MedicoDaoImpl;
 import br.com.clinicamedica.dao.impl.PacienteDaoImpl;
 import br.com.clinicamedica.model.Consulta;
+import br.com.clinicamedica.model.Contato;
 import br.com.clinicamedica.model.DataHoraConsulta;
+import br.com.clinicamedica.model.Email;
 import br.com.clinicamedica.model.Especialidade;
 import br.com.clinicamedica.model.Medico;
 import br.com.clinicamedica.model.Paciente;
 import br.com.clinicamedica.service.ConsultaService;
+import br.com.clinicamedica.util.EmailUtil;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,6 +38,10 @@ public class ConsultaServiceImpl implements ConsultaService {
             paciente.setCpf(Long.parseLong(request.getParameter("cpf")));
             PacienteDao pacienteDao = new PacienteDaoImpl();
             paciente = pacienteDao.readPaciente(paciente);
+            
+            ContatoDao contatoDao = new ContatoDaoImpl();
+            Contato contato = contatoDao.readContato(paciente.getContato());
+            
             
             Medico medico = new Medico();
             medico.setCrm(Long.parseLong(request.getParameter("medico")));
@@ -59,6 +68,13 @@ public class ConsultaServiceImpl implements ConsultaService {
             consultaDao = new ConsultaDaoImpl();
             consultaDao.createConsulta(consulta);
 
+            Email emailPaciente = new Email();
+            emailPaciente.setEmail(contato.getEmail());
+            emailPaciente.setNome(paciente.getNomeCompleto());
+            
+            EmailUtil emailUtil = new EmailUtil();  
+            emailUtil.enviarNotificacaoAgendamento(emailPaciente);
+            
             return true;
 
         } catch (Exception e) {
@@ -139,7 +155,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 
             consultaDao = new ConsultaDaoImpl();
             consultaDao.updateConsulta(consulta);
-
+            
             return true;
 
         } catch (Exception e) {

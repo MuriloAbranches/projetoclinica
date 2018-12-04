@@ -7,10 +7,12 @@ import br.com.clinicamedica.dao.impl.ContatoDaoImpl;
 import br.com.clinicamedica.dao.impl.EnderecoDaoImpl;
 import br.com.clinicamedica.dao.impl.PacienteDaoImpl;
 import br.com.clinicamedica.model.Contato;
+import br.com.clinicamedica.model.Email;
 import br.com.clinicamedica.model.Endereco;
 import br.com.clinicamedica.model.Paciente;
 import br.com.clinicamedica.model.Telefone;
 import br.com.clinicamedica.service.PacienteService;
+import br.com.clinicamedica.util.EmailUtil;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -90,6 +92,14 @@ public class PacienteServiceImpl implements PacienteService {
                 pacienteDao.activatePaciente(paciente); //Ativa Paciente no BD
             }
 
+            //Email
+            Email email = new Email();
+            email.setEmail(paciente.getContato().getEmail());
+            email.setNome(paciente.getNomeCompleto());
+            
+            EmailUtil emailUtil = new EmailUtil();  
+            emailUtil.enviarNotificaoCadastro(email); //Envia notificação
+                    
             return true;
 
         } catch (Exception e) {

@@ -18,7 +18,7 @@ public class ConsultaDaoImpl implements ConsultaDao {
 
     private static final String INSERT = "INSERT INTO CONSULTAS values (nextval('consultas_seq'),?,?,?,?,?);";
     private static final String DELETE = "UPDATE CONSULTAS SET flag_ativo = ? WHERE id = ?";
-    private static final String SELECT_ALL = "SELECT * FROM CONSULTAS";
+    private static final String SELECT_ALL = "SELECT * FROM CONSULTAS where flag_ativo = 1";
     private static final String SELECT = "SELECT * FROM CONSULTAS WHERE id = ?";
     private static final String UPDATE = "UPDATE CONSULTAS SET medico = ?, data_hora_consulta = ?, flag_ativo = ? WHERE id = ?";
     private static final String ACTIVATE = "UPDATE CONSULTAS SET flag_ativo = ? WHERE cpf = ?";

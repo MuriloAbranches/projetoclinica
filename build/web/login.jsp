@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-   
+
     <head>
 
         <meta charset="UTF-8">
@@ -20,19 +20,7 @@
 
     </head>
     <body>
-        <%
-            HttpSession PC_sessao = request.getSession(true);
-            if (!PC_sessao.isNew()) {
-                String Mens_Login = (String) PC_sessao.getAttribute("mensagem");
-                if (Mens_Login != null) {
-        %>
-             <h1 style="color: red"><%=Mens_Login%></h1>
-        <%
-                }
-            }
-            
-        %>
-         <div class="row col-md-12"></div>
+        <div class="row col-md-12"></div>
         <div class="row ">
             <div class="login-card">
                 <h1>Entrar</h1><br>
@@ -48,7 +36,7 @@
 
         <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
 
-    
+
 
     </body>
 </html>

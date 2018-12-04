@@ -1,7 +1,6 @@
 package br.com.clinicamedica.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,6 +34,8 @@ public class AutenticadorController extends HttpServlet {
             /* recupera e valida as credenciais do usuário */
             String usr = request.getParameter("email");
             String senha = request.getParameter("senha");
+            
+            
             if ("admin".equals(usr) && "admin".equals(senha)) {
                 PC_sessao.setAttribute("Login", usr);
                 response.sendRedirect("adminpages/index.jsp");

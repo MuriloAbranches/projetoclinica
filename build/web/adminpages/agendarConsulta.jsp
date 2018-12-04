@@ -30,7 +30,7 @@
         <%
                     Paciente buscaPaciente = (Paciente) request.getAttribute("buscaPaciente");
                    // Especialidade especialidade = (Especialidade) request.getAttribute("especialidade");
-                    String especialidade = (String) request.getAttribute("especialidade");
+                  String especialidade = (String) request.getAttribute("especialidade");
                     List<DataHoraConsulta> listaDataHora = (List<DataHoraConsulta>) request.getAttribute("listaDataHora");
 
                 %>
@@ -106,8 +106,7 @@
                             </div>
 
                             <div class="form-group" >
-                                <label>Especialidade</label>
-                                <input name="especialidade" type="text" id="especialidade" size="25" maxlength="150" class="form-control" value="<%= especialidade%>" readonly/>
+                                <input name="especialidade" type="hidden" id="especialidade" class="form-control" value="<%= especialidade %>"/>
                             </div>
 
                             <%
